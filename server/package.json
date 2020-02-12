@@ -1,0 +1,28 @@
+{
+  "name": "fullstack-template-server",
+  "description": "Template for a Koa server app with Apollo Server using GraphQL and a simple RedisAPI datasource",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/index.js"
+  },
+  "dependencies": {
+    "apollo-server-koa": "^2.9.16",
+    "graphql": "^14.6.0",
+    "ioredis": "^4.14.1",
+    "koa": "^2.11.0",
+    "node": "^13.7.0"
+  },
+  "main": "index.js",
+  "author": "Brian Beale",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "nodemon": "^2.0.2",
+    "redis-server": "^1.2.2"
+  }
+}

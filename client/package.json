@@ -1,0 +1,28 @@
+{
+  "name": "fullstack-template-client",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel ./public/index.html"
+  },
+  "description": "Template for a React app with Apollo Client & GraphQL",
+  "main": "index.jsx",
+  "author": "Brian Beale",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.4",
+    "apollo-link-http": "^1.5.16",
+    "apollo-server-koa": "^2.9.16",
+    "graphql": "^14.3.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "parcel-bundler": "^1.12.4"
+  }
+}

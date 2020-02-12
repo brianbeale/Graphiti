@@ -1,0 +1,11 @@
+Open app
+Choose registryRoot
+Navigate to specific subfolder
+View images in subfolder
+Focus on specific image
+Assign tags to image
+View sibling images
+Tag several images
+Search images by tag
+
+View all registered images

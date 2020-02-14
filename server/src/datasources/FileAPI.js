@@ -1,7 +1,9 @@
 import { DataSource } from 'apollo-datasource';
+import { readFile, readdir, Dirent } from 'fs';
 
 export default class FileAPI extends DataSource {
   constructor(registryRoot) {
+    super();
     this.registryRoot = registryRoot;
   }
 
@@ -9,7 +11,38 @@ export default class FileAPI extends DataSource {
     this.context = config.context;
   }
 
-  async getFile() {
-    
+  async getFile(filePath) {
+    const contents = await new Promise((resolve, reject)=>{
+      readFile(filePath, (err, data) => {
+        if (err) { reject(err) };
+        resolve(data);
+      });
+    });
+    // TODO: move base64 encoding to readFile? (new Buffer() deprecated)
+    return { filePath, contents: new Buffer(contents).toString('base64') };
+  }
+
+  async getFolder(folderPath) {
+    // TODO: refactor to fsPromises...
+    const folder = await new Promise((resolve, reject)=>{
+      readdir(folderPath, { withFileTypes: true }, (err, files)=>{
+        if (err) { reject(err) };
+
+        const filePaths = [];
+        const folderPaths = [];
+
+        // Each f in files is a Dirent per { withFileTypes: true }
+        try {
+          files.forEach((f)=>{
+            if (f.isFile() ) { filePaths.push(`${folderPath}/${f.name}`) }
+            else { folderPaths.push(`${folderPath}/${f.name}`)};
+          });
+        } catch (error) {
+          console.log(error);
+        };
+        resolve({ folderPath, filePaths, folderPaths });
+      });
+    });
+    return folder;
   }
 }

@@ -3,7 +3,8 @@
   "description": "Template for a Koa server app with Apollo Server using GraphQL and a simple RedisAPI datasource",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js"
+    "start": "nodemon --exec babel-node src/index.js",
+    "test": "nodemon --exec babel-node test.js"
   },
   "dependencies": {
     "apollo-server-koa": "^2.9.16",

@@ -20,15 +20,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from "@apollo/react-hooks";
 
-
-// import HelloMessage from './components/HelloMessage';
-import NameChanger from "./components/NameChanger";
+import Controller from './components/Controller';
 const app = (
-<ApolloProvider client={client}>
-  <NameChanger name='World' />
-</ApolloProvider>
+  <ApolloProvider client={client}>
+    <Controller />
+  </ApolloProvider>
 );
 
 const mountNode = document.getElementById('root');
-
 ReactDOM.render(app, mountNode);

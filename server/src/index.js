@@ -8,13 +8,16 @@ import RedisAPI from './datasources/RedisAPI';
 const Redis = require("ioredis");
 const store = new Redis();
 
+import FileAPI from './datasources/FileAPI';
+
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers, 
   cors: false,
   dataSources: () => {
     return {
-      RedisAPI: new RedisAPI(store)
+      RedisAPI: new RedisAPI(store),
+      FileAPI: new FileAPI('home/Brian/Pictures/')
     };
   }, 
   context: () => {

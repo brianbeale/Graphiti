@@ -1,0 +1,40 @@
+<NavBar>
+  <SearchBox>
+</NavBar>
+
+<main>
+  <LeftArrowButton />
+
+  <MetaDisplay>
+    <TagsDisplay>
+      <ul></ul>
+    </TagsDisplay>
+
+    <TaggingBox>
+      <input />
+      <button />
+    </TaggingBox>
+
+    <h2>{fileName}</h2>
+  </MetaDisplay>
+
+  <SlideViewer file={filePath + '/' + fileName}>
+    <img src={props.file} />
+  </SlideViewer>
+
+  <RightArrowButton />
+</main>
+
+<footer>
+  <SiblingsRibbon>
+
+  </SiblingsRibbon>
+
+  <BreadCrumbs filePath={filePath}>
+    <ul>
+      <li><a>{'> '+}</a></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </BreadCrumbs>
+</footer>

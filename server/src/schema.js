@@ -2,31 +2,21 @@ import { gql } from 'apollo-server-koa';
 
 const typeDefs = gql`
   type Query {
-    folder(filePath: String!): Folder
-  }
-
-  type Folder {
-    filePath: String!
-    parentDir: Folder
-    folders: [Folder]
-    files: [File]
+    file(filePath: String): File
+    folder(folderPath: String): Folder
   }
 
   type File {
     filePath: String!
-    parentDir: Folder!
     contents: String!
-    tags: [Tag]
   }
 
-  type Tag {
-    name: String!
+  type Folder {
+    folderPath: String!
     files: [File]
+    folders: [Folder]
   }
 
-  type Mutation {
-    assignTag(tag: String, filePath: String): String
-  }
 `;
 
 export default typeDefs;

@@ -1,0 +1,13 @@
+.Slide {
+  height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Slide img {
+  max-height: 100%;
+  /* padding-top: 10%; */
+}

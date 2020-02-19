@@ -11,7 +11,7 @@ export default class FileAPI extends DataSource {
     this.context = config.context;
   }
 
-  async getFile(filePath) {
+  async getFileContents(filePath) {
     const contents = await new Promise((resolve, reject)=>{
       readFile(filePath, (err, data) => {
         if (err) { reject(err) };
@@ -19,7 +19,7 @@ export default class FileAPI extends DataSource {
       });
     });
     // TODO: move base64 encoding to readFile? (new Buffer() deprecated)
-    return { filePath, contents: new Buffer(contents).toString('base64') };
+    return new Buffer(contents).toString('base64');
   }
 
   async getFolder(folderPath) {
@@ -34,6 +34,7 @@ export default class FileAPI extends DataSource {
         // Each f in files is a Dirent per { withFileTypes: true }
         try {
           files.forEach((f)=>{
+            // console.log('f'); console.log(f);
             if (f.isFile() ) { filePaths.push(`${folderPath}/${f.name}`) }
             else { folderPaths.push(`${folderPath}/${f.name}`)};
           });

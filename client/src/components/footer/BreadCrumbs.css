@@ -1,0 +1,38 @@
+.BreadCrumbs {
+  display: flex;
+  height: 25%;
+}
+
+.BreadCrumbs ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  height: 100%;
+  margin: 0;
+}
+
+.BreadCrumbs li::after {
+  content: ' > ';
+}
+
+.BreadCrumbs a.unfocused {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.BreadCrumbs a.unfocused:hover {
+  color: red;
+}
+
+.BreadCrumbs a.focused {
+  cursor: default;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}

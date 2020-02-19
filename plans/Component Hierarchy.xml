@@ -1,36 +1,40 @@
-<NavBar>
+<Controller /> (contains all)
+
+<header>
   <SearchBox>
-</NavBar>
+</header>
 
 <main>
-  <LeftArrowButton />
+  <SlideViewer>
+    <LeftArrowButton />
 
-  <MetaDisplay>
-    <TagsDisplay>
-      <ul></ul>
-    </TagsDisplay>
+    <MetaDisplay>
+      <TagsDisplay>
+        <ul></ul>
+      </TagsDisplay>
 
-    <TaggingBox>
-      <input />
-      <button />
-    </TaggingBox>
+      <TaggingBox>
+        <input />
+        <button />
+     </TaggingBox>
 
-    <h2>{fileName}</h2>
-  </MetaDisplay>
+      <h2>{fileName}</h2>
+    </MetaDisplay>
 
-  <SlideViewer file={filePath + '/' + fileName}>
-    <img src={props.file} />
+    <Slide />
+
+    <RightArrowButton />
   </SlideViewer>
-
-  <RightArrowButton />
 </main>
 
 <footer>
   <SiblingsRibbon>
-
+    <button />
+    <ul></ul>
+    <button />
   </SiblingsRibbon>
 
-  <BreadCrumbs filePath={filePath}>
+  <BreadCrumbs folderPath={folderFocus} setFolderFocus={setFolderFocus}>
     <ul>
       <li><a>{'> '+}</a></li>
       <li></li>

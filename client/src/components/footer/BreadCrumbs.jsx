@@ -29,6 +29,10 @@ export default function BreadCrumbs(props) {
     folders.set(folderName, folderPaths[i]);
   });
   // console.log(folders);
+  function onSelect(folderPath) {
+    props.setFolderFocus(folderPath);
+    props.setPageNum(0);
+  }
 
   return (
     <div className='BreadCrumbs'>
@@ -36,7 +40,7 @@ export default function BreadCrumbs(props) {
         {Array.from(folders, ([folderName, folderPath]) => {
           return (
             <li key={folderPath} >
-              <a onClick={ (e)=>{props.setFolderFocus(folderPath)} }
+              <a onClick={ (e)=>onSelect(folderPath) }
                 className={ props.folderPath === folderPath ? 'focused' : 'unfocused' }
               >
                 {folderName}
@@ -46,7 +50,8 @@ export default function BreadCrumbs(props) {
         })}
       </ul>
       <SubFolderSelector folderPath={props.folderPath} 
-        setFolderFocus={props.setFolderFocus} setPageNum={props.setPageNum}
+        // setFolderFocus={props.setFolderFocus} setPageNum={props.setPageNum}
+        onSelect={onSelect}
       />
     </div>
   );

@@ -4,4 +4,6 @@
 
 .MainSlide {
   height: 100%;
+  cursor: pointer;
+  width: 50vw;
 }

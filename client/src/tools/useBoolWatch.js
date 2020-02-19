@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 
-export default function useBoolWatch(dynamicBool, debug=false) {
+export default function useBoolWatch(dynamicBool, debugName=false) {
   const [flag, setFlag] = useState(false);
-  if (debug) {
+  if (debugName) {
     console.log('BoolWatch firing!');
-    console.log('dynamicBool: ');
+    // console.log('dynamicBool: ');
+    console.log(debugName);
     console.log(dynamicBool);
+    // debugName=false;
   }
     useEffect(()=>{
     // if ( Array.isArray(dynamicBool) ) {

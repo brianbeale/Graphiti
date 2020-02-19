@@ -9,7 +9,7 @@ import './Controller.css';
 export default function Controller(props) {
   const [folderFocus, setFolderFocus] = useState('/home/brian/Pictures/p/67');
   const [fileFocus, setFileFocus] = useState('/home/brian/Pictures/index.jpeg');
-  const [fullScreen, setFullScreen] = useState(true);
+  const [fullScreen, setFullScreen] = useState(false);
   const [pageNum, setPageNum] = useState(0);
   useEffect(()=>{
     console.log(`Fullscreen: ${fullScreen}`);

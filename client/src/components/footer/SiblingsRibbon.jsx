@@ -34,7 +34,9 @@ export default function SiblingsRibbon(props) {
       const filePaths = [ ...data.folder.files.map( file => file.filePath ) ];
       /* np represents numPages to avoid naming conflict
         with useState() numPages (not ready when this effect runs) */
-      const np = Math.floor(filePaths.length / props.pageSize) + 1;
+      const np = (Math.floor(filePaths.length / props.pageSize) 
+        + (filePaths.length % props.pageSize ? 1 : 0)
+      );
       setNumPages(np);
       // Build array of pages, each an array of filePaths
       const pages = [];
@@ -64,7 +66,7 @@ export default function SiblingsRibbon(props) {
   //   setPageNum(0);
   // },[props.folderPath]);
 
-  const flag = useBoolWatch(siblings[0]);
+  const flag = useBoolWatch(siblings[0], 'siblings[0]');
 
   return (
     <div className='SiblingsRibbon'>

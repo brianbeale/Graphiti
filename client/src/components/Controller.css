@@ -10,3 +10,7 @@ footer {
   height: 28vh;
   background-color: brown;
 }
+
+.FullScreenDiv {
+  cursor: pointer;
+}

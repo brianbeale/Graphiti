@@ -37,8 +37,13 @@ export default function SubFolderSelector(props) {
     }
   },[data]);
 
-  useLogging('subFolders', subFolders);
-  const flag = useBoolWatch(subFolders);
+  // useLogging('subFolders', subFolders);
+  const flag = useBoolWatch(subFolders, 'subfolders');
+
+  // function onSelect(folderPath) {
+  //   props.setFolderFocus(folderPath);
+  //   props.setPageNum(0);
+  // }
 
   return flag ? (
     <select name="subfolders" id="SubFolderSelector">
@@ -47,7 +52,7 @@ export default function SubFolderSelector(props) {
       return (
         <option key={folderPath} 
           value={folderPath}
-          onClick={(e)=>{ props.setFolderFocus(folderPath) } }
+          onClick={(e)=>{ props.onSelect(folderPath) } }
         >
           {folderName}
         </option>

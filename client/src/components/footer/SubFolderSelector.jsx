@@ -28,7 +28,7 @@ export default function SubFolderSelector(props) {
     else if (loading) { console.log('SubFolderSelector Loading...') }
     else {
       const folderPaths = [...data.folder.folders.map( folder => folder.folderPath ) ];
-      console.log(folderPaths);
+      // console.log(folderPaths);
       const folders = new Map();
       folderPaths.forEach((folderPath) => {
         folders.set( folderPath.slice( folderPath.lastIndexOf('/') ), folderPath );
@@ -38,7 +38,7 @@ export default function SubFolderSelector(props) {
   },[data]);
 
   // useLogging('subFolders', subFolders);
-  const flag = useBoolWatch(subFolders, 'subfolders');
+  const flag = useBoolWatch(subFolders);
 
   // function onSelect(folderPath) {
   //   props.setFolderFocus(folderPath);

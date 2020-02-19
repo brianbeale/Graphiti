@@ -33,7 +33,7 @@ export default class FileAPI extends DataSource {
 
         // Each f in files is a Dirent per { withFileTypes: true }
         try {
-          files.forEach((f)=>{
+          files.filter(f=>f.name[0]!=='.').forEach((f)=>{
             // console.log('f'); console.log(f);
             if (f.isFile() ) { filePaths.push(`${folderPath}/${f.name}`) }
             else { folderPaths.push(`${folderPath}/${f.name}`)};

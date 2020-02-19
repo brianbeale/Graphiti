@@ -52,7 +52,7 @@ export default function SiblingsRibbon(props) {
         }
         pages.push(slots);
       }
-      setSiblings(pages);
+      setSiblings(pages.length ? pages : [ [] ]);
     };
   },[data]);
 
@@ -66,7 +66,7 @@ export default function SiblingsRibbon(props) {
   //   setPageNum(0);
   // },[props.folderPath]);
 
-  const flag = useBoolWatch(siblings[0], 'siblings[0]');
+  const flag = useBoolWatch(siblings[0]);
 
   return (
     <div className='SiblingsRibbon'>

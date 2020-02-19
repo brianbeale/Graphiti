@@ -16,10 +16,10 @@ export default function usePicture(filePath) {
   const [src, setSrc] = useState('');
   useEffect(()=>{
     if (error) { throw error }
-    else if (loading) {console.log('Loading Picture...')}
+    else if (loading) {setSrc('loading')}
     else {
       setSrc('data:image/gif;base64,' + data.file.contents);
-      console.log('Done');
+      // console.log('Done');
     }
   },[data]);
   return src;

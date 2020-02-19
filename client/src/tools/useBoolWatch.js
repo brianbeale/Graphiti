@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 
+`used by:
+  SiblingsRibbon
+  SubFolderSelector`
+
 export default function useBoolWatch(dynamicBool, debugName=false) {
   const [flag, setFlag] = useState(false);
   if (debugName) {

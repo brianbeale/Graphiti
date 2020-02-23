@@ -5,7 +5,7 @@ import typeDefs from './schema';
 import resolvers from './resolvers';
 
 import RedisAPI from './datasources/RedisAPI';
-const Redis = require("ioredis");
+const Redis = require('ioredis');
 const store = new Redis();
 
 import FileAPI from './datasources/FileAPI';

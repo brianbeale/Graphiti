@@ -1,37 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-
-import './BreadCrumbs.css';
+import React from 'react';
+import PropTypes from 'prop-types';
 import SubFolderSelector from './SubFolderSelector';
+import './BreadCrumbs.css';
 
-export default function BreadCrumbs(props) {
+export default function BreadCrumbs(
+  { propFolderPath, setFolderFocus, setPageNum, fileIndex, setFileIndex }
+){
   `Needs to take props.folderPath and make a Map of folderPaths
-  with folderName as keys`
+  with folderName as keys`;
 
-  // function pathsFromNames(folderNames) {
-  //   const folderPaths = [];
-  //   folderNames.forEach((folderName, index)=>{
-  //     const ancestor = index ? folderPaths[index-1] : '';
-  //     folderPaths.push(`${ancestor}/${folderName}`);
-  //   });
-  // }
+  const folders = folderPathToBreadCrumbsMap(propFolderPath);
 
-  const folderNames = props.folderPath.split('/');
-  folderNames.shift();
-  const folderPaths = [];
-  folderNames.forEach((folderName, index)=>{
-    const parent = index ? folderPaths[index-1] : '';
-    folderPaths.push(`${parent}/${folderName}`);
-  });
-  const folders = new Map();
-  folderNames.forEach((folderName, i) => {
-    folders.set(folderName, folderPaths[i]);
-  });
-  // console.log(folders);
   function onSelect(folderPath) {
-    props.setFolderFocus(folderPath);
-    props.setPageNum(0);
+    setFolderFocus(folderPath);
+    setPageNum(0);
+    setFileIndex(0);
+    console.log('onSelect!'); console.log(fileIndex);
   }
 
   return (
@@ -40,8 +24,8 @@ export default function BreadCrumbs(props) {
         {Array.from(folders, ([folderName, folderPath]) => {
           return (
             <li key={folderPath} >
-              <a onClick={ (e)=>onSelect(folderPath) }
-                className={ props.folderPath === folderPath ? 'focused' : 'unfocused' }
+              <a onClick={ () => onSelect(folderPath) }
+                className={ folderPath === propFolderPath ? 'focused' : 'unfocused' }
               >
                 {folderName}
               </a>
@@ -49,10 +33,33 @@ export default function BreadCrumbs(props) {
           );
         })}
       </ul>
-      <SubFolderSelector folderPath={props.folderPath} 
-        // setFolderFocus={props.setFolderFocus} setPageNum={props.setPageNum}
+      <SubFolderSelector propFolderPath={propFolderPath} 
         onSelect={onSelect}
       />
     </div>
   );
+}
+
+function folderPathToBreadCrumbsMap(folderPath) {
+  const folderNames = folderPath.split('/');
+  folderNames.shift();
+  const folderPaths = [];
+  folderNames.forEach((folderName, index) => {
+    const parent = index ? folderPaths[index - 1] : '';
+    folderPaths.push( `${parent}/${folderName}` );
+  });
+  const folders = new Map();
+  folderNames.forEach((folderName, i) => {
+    folders.set(folderName, folderPaths[i]);
+  });
+  return folders;
+}
+
+BreadCrumbs.propTypes = {
+  propFolderPath: PropTypes.string,
+  setFolderFocus: PropTypes.func,
+
+  setPageNum: PropTypes.func,
+  fileIndex: PropTypes.number,
+  setFileIndex: PropTypes.func
 };

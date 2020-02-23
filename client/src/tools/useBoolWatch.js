@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 `used by:
   SiblingsRibbon
-  SubFolderSelector`
+  SubFolderSelector`;
 
 export default function useBoolWatch(dynamicBool, debugName=false) {
   const [flag, setFlag] = useState(false);
@@ -13,21 +13,16 @@ export default function useBoolWatch(dynamicBool, debugName=false) {
     console.log(dynamicBool);
     // debugName=false;
   }
-    useEffect(()=>{
+  useEffect(()=>{
     // if ( Array.isArray(dynamicBool) ) {
-    if (dynamicBool instanceof Array) {
-      if (dynamicBool.length) { setFlag(true) }
-      else { setFlag(false) }
-    } 
-    if (dynamicBool instanceof Map) {
-      if (dynamicBool.size) { setFlag(true) }
-      else { setFlag(false) }
-    } 
-    else if (dynamicBool) {
+    if (dynamicBool instanceof Array && dynamicBool.length) {
       setFlag(true);
+    } 
+    else if (dynamicBool instanceof Map && dynamicBool.size) {
+      setFlag(true); 
     } else {
       setFlag(false);
     }
   },[dynamicBool]);
   return flag;
-};
+}

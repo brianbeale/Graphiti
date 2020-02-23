@@ -1,5 +1,5 @@
 import { DataSource } from 'apollo-datasource';
-import { readFile, readdir, Dirent } from 'fs';
+import { readFile, readdir } from 'fs';
 
 export default class FileAPI extends DataSource {
   constructor(registryRoot) {
@@ -12,9 +12,9 @@ export default class FileAPI extends DataSource {
   }
 
   async getFileContents(filePath) {
-    const contents = await new Promise((resolve, reject)=>{
+    const contents = await new Promise((resolve, reject) => {
       readFile(filePath, (err, data) => {
-        if (err) { reject(err) };
+        if (err) { reject(err); }
         resolve(data);
       });
     });
@@ -24,23 +24,21 @@ export default class FileAPI extends DataSource {
 
   async getFolder(folderPath) {
     // TODO: refactor to fsPromises...
-    const folder = await new Promise((resolve, reject)=>{
-      readdir(folderPath, { withFileTypes: true }, (err, files)=>{
-        if (err) { reject(err) };
-
+    const folder = await new Promise((resolve, reject) => {
+      readdir(folderPath, { withFileTypes: true }, (err, files) => {
+        if (err) { reject(err); }
         const filePaths = [];
         const folderPaths = [];
-
         // Each f in files is a Dirent per { withFileTypes: true }
         try {
           files.filter(f=>f.name[0]!=='.').forEach((f)=>{
             // console.log('f'); console.log(f);
-            if (f.isFile() ) { filePaths.push(`${folderPath}/${f.name}`) }
-            else { folderPaths.push(`${folderPath}/${f.name}`)};
+            if (f.isFile() ) { filePaths.push(`${folderPath}/${f.name}`); }
+            else { folderPaths.push(`${folderPath}/${f.name}`); }
           });
         } catch (error) {
           console.log(error);
-        };
+        }
         resolve({ folderPath, filePaths, folderPaths });
       });
     });

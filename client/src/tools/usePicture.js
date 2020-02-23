@@ -15,12 +15,12 @@ export default function usePicture(filePath) {
   );
   const [src, setSrc] = useState('');
   useEffect(()=>{
-    if (error) { throw error }
-    else if (loading) {setSrc('loading')}
+    if (error) { throw error; }
+    else if (loading) { setSrc('loading'); }
     else {
       setSrc('data:image/gif;base64,' + data.file.contents);
       // console.log('Done');
     }
-  },[data]);
+  },[data, loading, error]);
   return src;
 }

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-
-import useLogging from '../../tools/useLogging';
 import useBoolWatch from '../../tools/useBoolWatch';
 
 const GET_CHILD_FOLDERS = gql`
@@ -15,49 +14,47 @@ const GET_CHILD_FOLDERS = gql`
   }
 `;
 
-export default function SubFolderSelector(props) {
+export default function SubFolderSelector({propFolderPath, onSelect}) {
   `Takes a folderPath and renders a dropdown 
-  to select from the children`
+  to select from the children`;
 
   const { data, loading, error } = useQuery(GET_CHILD_FOLDERS,
-    { variables: { folderPath: props.folderPath } }
+    { variables: { folderPath: propFolderPath } }
   );
   const [subFolders, setSubFolders] = useState([]);
   useEffect(()=>{
-    if (error) { throw error }
-    else if (loading) { console.log('SubFolderSelector Loading...') }
+    if (error) { console.error(error); }
+    else if (loading) { console.log('SubFolderSelector Loading...'); }
     else {
-      const folderPaths = [...data.folder.folders.map( folder => folder.folderPath ) ];
-      // console.log(folderPaths);
+      const folderPaths = data.folder.folders.map( folder => folder.folderPath );
       const folders = new Map();
       folderPaths.forEach((folderPath) => {
         folders.set( folderPath.slice( folderPath.lastIndexOf('/') ), folderPath );
       });
       setSubFolders(folders);
     }
-  },[data]);
+  },[data, loading, error]);
 
-  // useLogging('subFolders', subFolders);
   const flag = useBoolWatch(subFolders);
-
-  // function onSelect(folderPath) {
-  //   props.setFolderFocus(folderPath);
-  //   props.setPageNum(0);
-  // }
 
   return flag ? (
     <select name="subfolders" id="SubFolderSelector">
-    <option value="">subfolders</option>
-    {Array.from(subFolders, ([folderName, folderPath])=>{
-      return (
-        <option key={folderPath} 
-          value={folderPath}
-          onClick={(e)=>{ props.onSelect(folderPath) } }
-        >
-          {folderName}
-        </option>
-      );
-    })}
+      <option value="">subfolders</option>
+      {Array.from(subFolders, ([folderName, folderPath])=>{
+        return (
+          <option key={folderPath} 
+            value={folderPath}
+            onClick={()=>{ onSelect(folderPath); } }
+          >
+            {folderName}
+          </option>
+        );
+      })}
     </select>
   ) : <p></p>;
+}
+
+SubFolderSelector.propTypes = {
+  propFolderPath: PropTypes.string,
+  onSelect: PropTypes.func
 };

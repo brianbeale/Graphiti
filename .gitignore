@@ -2,3 +2,5 @@
 **/redis/**
 **/.cache/**
 **/dist/**
+**/plans/**
+**/.vscode/**

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Slide from './Slide';
 import './SlideViewer.css';
 
@@ -12,4 +13,9 @@ export default function SlideViewer(props) {
       </div>
     </div>
   );
+}
+
+SlideViewer.propTypes = {
+  setFullScreen: PropTypes.func,
+  filePath: PropTypes.string,
 };

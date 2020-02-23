@@ -2,8 +2,14 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  background-color: black;
+}
+
 main {
   height: 69vh;
+  background-color: black;
 }
 
 footer {
@@ -12,5 +18,10 @@ footer {
 }
 
 .FullScreenDiv {
+  background-color: black;
+  height: 97vh;
+}
+
+.FullScreenSlide {
   cursor: pointer;
 }

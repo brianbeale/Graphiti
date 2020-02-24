@@ -4,3 +4,5 @@
 **/dist/**
 **/plans/**
 **/.vscode/**
+**/jsconfig.json
+**/log.txt

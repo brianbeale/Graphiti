@@ -18,4 +18,25 @@ export default class RedisAPI extends DataSource {
   async getKey(key) {
     return this.redis.get(key);
   }
+
+  async sadd(key, member) {
+    this.redis.sadd(key, member);
+    return member;
+  }
+
+  async smembers(key) {
+    return this.redis.smembers(key);
+  }
+
+  async srem(key, member) {
+    return this.redis.srem(key, member);
+  }
+
+  async sinter(keys) {
+    return this.redis.sinter(keys);
+  }
+
+  async scard(key) {
+    return this.redis.scard(key);
+  }
 }

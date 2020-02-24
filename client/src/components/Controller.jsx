@@ -7,6 +7,8 @@ import SiblingsRibbon from './footer/SiblingsRibbon';
 import BreadCrumbs from './footer/BreadCrumbs';
 import FullScreenViewer from './FullScreenViewer';
 import './Controller.css';
+import spinner from '../../assets/Spinner-1s-200px.gif';
+import warning from '../../assets/warning.jpeg';
 
 const GET_CHILD_FILES = gql`
   query filePathsInFolder($folderPath: String) {
@@ -17,25 +19,36 @@ const GET_CHILD_FILES = gql`
     }
   }
 `;
+// import TaggingBox from './main/TaggingBox';
+import MetaDisplay from './main/MetaDisplay';
+// export default function Controller() {
+//   return <MetaDisplay filePath={'/home/brian/Pictures/index.jpeg'} />;
+// }
 
 export default function Controller() {
-  const [folderFocus, setFolderFocus] = useState('/home/brian/Pictures/p');
+  const [folderFocus, setFolderFocus] = useState('/home/brian/Pictures');
   const [fullScreen, setFullScreen] = useState(false);
   const [pageNum, setPageNum] = useState(0);
   const [fileIndex, setFileIndex] = useState(0);
 
-  const [filePaths, setFilePaths] = useState([]);
+  const [filePaths, setFilePaths] = useState(
+    ['']
+  );
   const { data, loading, error } = useQuery(GET_CHILD_FILES,
     { variables: { folderPath: folderFocus } }
   );
   useEffect(()=>{
     
-    if (error) { console.error(error); }
+    if (error) { console.log('Controller query error'); console.log(error); }
     else if (loading) { console.log('loading'); }
     else {
       setFilePaths(data.folder.files.map( file => file.filePath ) );
     }
   },[data, loading, error]);
+
+  if (loading) { 
+    return <img src={spinner} />;
+  } else if (error) { return <img src={warning} height='300px'/>; }
 
   return fullScreen ?
     (<FullScreenViewer 
@@ -46,6 +59,7 @@ export default function Controller() {
     : (
       <>
         <main>
+          <MetaDisplay filePath={'/home/brian/Pictures/index.jpeg'} />
           <SlideViewer setFullScreen={setFullScreen}
             filePath={filePaths[fileIndex]} 
           />

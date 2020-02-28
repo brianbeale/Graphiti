@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import './TaggingBox.css';
 
 const ASSIGN_TAG = gql`
   mutation tagFile($filePath: String, $tagName: String) {
@@ -20,6 +21,11 @@ const UNASSIGN_TAG = gql`
  }
 `;
 
+// const UPDATE_CACHE = gql`
+//   query updateCache()
+// `;
+import { GET_TAGS } from './MetaDisplay';
+
 export default function TaggingBox(
   { filePath, addTagForDisplay, removeDisplayedTag }
 ) {
@@ -27,20 +33,25 @@ export default function TaggingBox(
   const [unassignTag] = useMutation(UNASSIGN_TAG);
   const [val, setVal] = useState('');
 
-  function onAdd(name) {
-    assignTag({ variables: { filePath, tagName: name } });
-    addTagForDisplay(name);
+  function onAdd(inputString) {
+    const name = inputString.trim();
+    if (name.length) {
+      assignTag({ variables: { filePath, tagName: name }, 
+        refetchQueries: [{query: GET_TAGS, variables: { filePath } }] });
+      addTagForDisplay(name);
+    }
     setVal('');
     console.log('onAdd');
   }
   function onDelete(name) {
-    unassignTag({ variables: { filePath, tagName: name } });
+    unassignTag({ variables: { filePath, tagName: name },
+      refetchQueries: [{query: GET_TAGS, variables: { filePath } }] });
     removeDisplayedTag(name);
     setVal('');
     console.log('onDelete()');
   }
   return (
-    <>
+    <div className='TaggingBox'>
       <input value={val}
         onChange={ (e) => setVal( e.target.value.toLowerCase() ) } 
       />
@@ -55,7 +66,7 @@ export default function TaggingBox(
       >
         {'-'}
       </button>
-    </>
+    </div>
   );
 }
 

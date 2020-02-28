@@ -19,7 +19,9 @@ export default function FullScreenViewer(
         Prev File
       </button>
 
-      <Slide filePath={fileFocus} />
+      <div className='FullScreenSlide' onClick={() => setFullScreen(false) }>
+        <Slide filePath={fileFocus} setFullScreen={setFullScreen} />
+      </div>
 
       <button onClick={
         () => { setFileIndex( (fileIndex + 1) % numFiles ); }

@@ -5,6 +5,7 @@ const typeDefs = gql`
     file(filePath: String): File
     folder(folderPath: String): Folder
     tag(tagName: String): Tag
+    filesTagged(tagNames: [String]): [File]
   }
 
   type Mutation {
@@ -13,7 +14,7 @@ const typeDefs = gql`
   }
 
   type TagFileResponse {
-    filePath: String!
+    filePath: String
     tagNames: [String]
   }
 

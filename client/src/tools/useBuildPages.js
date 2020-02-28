@@ -13,6 +13,7 @@ export default function useBuildPages(filePaths, pageSize) {
       }
       p.push(slots);
     }
+    if (!p.length || !p[0].length) { p.push(['']); }
     setPages(p);
   },[filePaths, pageSize]);
   return pages;

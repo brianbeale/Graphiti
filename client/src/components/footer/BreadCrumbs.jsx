@@ -4,7 +4,8 @@ import SubFolderSelector from './SubFolderSelector';
 import './BreadCrumbs.css';
 
 export default function BreadCrumbs(
-  { propFolderPath, setFolderFocus, setPageNum, fileIndex, setFileIndex }
+  { propFolderPath, setFolderFocus, setPageNum, setFileIndex, 
+    searchMode, setSearchMode }
 ){
   `Needs to take props.folderPath and make a Map of folderPaths
   with folderName as keys`;
@@ -12,10 +13,11 @@ export default function BreadCrumbs(
   const folders = folderPathToBreadCrumbsMap(propFolderPath);
 
   function onSelect(folderPath) {
+    console.log('%conSelect()', 'color:blue');
     setFolderFocus(folderPath);
     setPageNum(0);
     setFileIndex(0);
-    console.log('onSelect!'); console.log(fileIndex);
+    setSearchMode(false);
   }
 
   return (
@@ -36,6 +38,7 @@ export default function BreadCrumbs(
       <SubFolderSelector propFolderPath={propFolderPath} 
         onSelect={onSelect}
       />
+      {searchMode ? <p>Search Mode</p> : <></>}
     </div>
   );
 }
@@ -60,6 +63,8 @@ BreadCrumbs.propTypes = {
   setFolderFocus: PropTypes.func,
 
   setPageNum: PropTypes.func,
-  fileIndex: PropTypes.number,
-  setFileIndex: PropTypes.func
+  setFileIndex: PropTypes.func,
+
+  searchMode: PropTypes.bool,
+  setSearchMode: PropTypes.func,
 };

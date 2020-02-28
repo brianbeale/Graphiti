@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import TagsDisplay from './TagsDisplay';
 import TaggingBox from './TaggingBox';
 
-const GET_TAGS = gql`
+export const GET_TAGS = gql`
  query tagsAssignedToFile($filePath: String) {
    file(filePath: $filePath) {
      tags {
@@ -14,12 +15,11 @@ const GET_TAGS = gql`
  }
 `;
 
-export default function MetaDisplay({ filePath }) {
+export default function MetaDisplay({ filePath, searchedTags }) {
   const { data, loading, error } = useQuery(
-    GET_TAGS, { variables: { filePath }}
+    GET_TAGS, { variables: { filePath } }
   );
   const [tagNames, setTagNames] = useState([]);
-  // const tagSet = new Set(tagNames);
 
   function addTagForDisplay(inputString) {
     const tagSet = new Set(tagNames);
@@ -46,11 +46,7 @@ export default function MetaDisplay({ filePath }) {
 
   return (
     <>
-      <div className='TagsDisplay' >
-        <ul>
-          {tagNames.map( (tagName, i) => <li key={i}>{tagName}</li>)}
-        </ul>
-      </div>
+      <TagsDisplay tagNames={tagNames} searchedTags={searchedTags} />
       <TaggingBox filePath={filePath} 
         addTagForDisplay={addTagForDisplay} removeDisplayedTag={removeDisplayedTag}
       />
@@ -60,4 +56,5 @@ export default function MetaDisplay({ filePath }) {
 
 MetaDisplay.propTypes = {
   filePath: PropTypes.string,
+  searchedTags: PropTypes.arrayOf(PropTypes.string),
 };

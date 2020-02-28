@@ -10,6 +10,37 @@ body {
 main {
   height: 69vh;
   background-color: black;
+
+  display: grid;
+  grid-template-columns: 1vh 2fr 3fr;
+  grid-template-rows: 1fr 8vh 1vh;
+  gap: 3px;
+}
+
+.verticalSpacer {
+  grid-column: 1 / 2;
+  grid-row: 1 / -1;
+}
+
+.TagsDisplay {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.TaggingBox {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.SlideViewer {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+}
+
+.horizontalSpacer {
+  grid-column: 1 / -1;
+  grid-row: 3 / 4;
+  height: 2vh;
 }
 
 footer {

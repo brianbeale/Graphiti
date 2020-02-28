@@ -1,0 +1,19 @@
+.TagsDisplay ul {
+  list-style: none;
+}
+
+.TagsDisplay li {
+  display: inline;
+}
+
+.TagsDisplay li:after {
+  content: ", ";
+}
+
+.TagsDisplay li:last-child:after {
+  content: "";
+}
+
+.TagsDisplay li.highlight {
+  color: orangered;
+}

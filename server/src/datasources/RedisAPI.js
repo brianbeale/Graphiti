@@ -33,6 +33,7 @@ export default class RedisAPI extends DataSource {
   }
 
   async sinter(keys) {
+    if (!keys.length) { return []; }
     return this.redis.sinter(keys);
   }
 

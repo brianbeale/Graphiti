@@ -126,7 +126,7 @@ export default function Controller() {
           <SiblingsRibbon 
             filePaths={displayPaths}
             fileIndex={fileIndex} setFileIndex={setFileIndex}
-            pageSize={5} pageNum={pageNum} setPageNum={setPageNum}
+            pageSize={3} pageNum={pageNum} setPageNum={setPageNum}
           />
           <BreadCrumbs propFolderPath={folderFocus}
             setFolderFocus={setFolderFocus} 
